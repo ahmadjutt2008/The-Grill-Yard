@@ -6,15 +6,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.querySelector('.navbar');
 
     // Navbar scroll effect
+    let scroled = false;
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
-            navbar.style.background = 'rgba(10, 10, 10, 0.98)';
-            navbar.style.padding = '0.5rem 0';
-            navbar.style.boxShadow = '0 5px 20px rgba(0,0,0,0.5)';
+            if (!scroled) {
+                navbar.classList.add('navbar-scrolled');
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+                navbar.style.padding = '0.5rem 0';
+                navbar.style.boxShadow = '0 5px 20px rgba(0,0,0,0.5)';
+                scroled = true;
+            }
         } else {
-            navbar.style.background = 'rgba(10, 10, 10, 0.8)';
-            navbar.style.padding = '1rem 0';
-            navbar.style.boxShadow = 'none';
+            if (scroled) {
+                navbar.classList.remove('navbar-scrolled');
+                navbar.style.background = 'rgba(10, 10, 10, 0.8)';
+                navbar.style.padding = '1rem 0';
+                navbar.style.boxShadow = 'none';
+                scroled = false;
+            }
         }
     });
 

@@ -52,11 +52,18 @@ h5,
 
 /* Navbar */
 .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1030;
     background-color: rgba(10, 10, 10, 0.95);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(212, 175, 55, 0.2);
     padding: 1rem 0;
-    transition: var(--transition);
+    transition: background-color 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+    will-change: padding, background-color;
 }
 
 .navbar-brand {
@@ -138,6 +145,20 @@ h5,
 .btn-outline-gold:hover {
     background-color: var(--primary-color);
     color: var(--bg-dark);
+}
+
+/* Navbar Stabilization on Mobile */
+@media (max-width: 991px) {
+    .navbar {
+        padding: 0.8rem 0 !important;
+        /* Slightly smaller but constant padding on mobile to prevent jump */
+    }
+
+    .navbar-collapse {
+        background: rgba(10, 10, 10, 0.98);
+        padding: 1rem;
+        margin-top: 0.8rem;
+    }
 }
 
 /* Sections */

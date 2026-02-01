@@ -74,16 +74,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Lightbox Modal Logic
-    const lightboxModal = document.getElementById('lightboxModal');
-    if (lightboxModal) {
-        lightboxModal.addEventListener('show.bs.modal', function (event) {
-            const button = event.relatedTarget;
-            const imgSrc = button.getAttribute('data-img-src');
-            const modalImg = lightboxModal.querySelector('#lightbox-img');
-            modalImg.src = imgSrc;
+
+    // Gallery Interaction (Conditional: Desktop Popup vs Mobile In-place)
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const lightboxModalEl = document.getElementById('lightboxModal');
+    const lightboxModal = lightboxModalEl ? new bootstrap.Modal(lightboxModalEl) : null;
+
+    galleryItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            const isDetailed = item.classList.contains('detailed');
+            const captionText = item.querySelector('.gallery-overlay span').innerText;
+            const imgSrc = item.getAttribute('data-img-src');
+
+            if (window.innerWidth > 768) {
+                // Desktop: Show Premium Lightbox
+                if (lightboxModal) {
+                    const modalImg = lightboxModalEl.querySelector('#lightbox-img');
+                    const modalCaption = lightboxModalEl.querySelector('#lightbox-caption');
+                    modalImg.src = imgSrc;
+                    modalCaption.innerText = captionText;
+                    lightboxModal.show();
+                }
+            } else {
+                // Mobile: Toggle In-Place Detail
+                galleryItems.forEach(i => i.classList.remove('detailed'));
+                if (!isDetailed) {
+                    item.classList.add('detailed');
+                }
+            }
         });
-    }
+    });
 
     // Animation on scroll (Simple Reveal)
     const reveal = () => {

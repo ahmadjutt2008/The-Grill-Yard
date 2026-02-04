@@ -59,4 +59,8 @@ Includes standard policies:
 
 ---
 
+<<<<<<< HEAD
 © 2026 Grill Yard. Dedicated to the art of grilling.
+=======
+© 2026 Grill Yard. Dedicated to the art of grilling.
+>>>>>>> c37da57ff592da949e9019305fdb654b082c0542
